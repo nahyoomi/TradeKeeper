@@ -1,10 +1,17 @@
 package com.icodeap.tradekeeper.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
-
+@Entity
+@Table(name = "PRICE_REDUCTIONS")
 public class PriceReduction {
+    @Column
     public double reducedPrice;
+    @Column
     public Date startDate;
+    @Column
     public Date endDate;
 
     public PriceReduction(double reducedPrice, Date startDate, Date endDate) {

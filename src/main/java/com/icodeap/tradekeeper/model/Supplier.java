@@ -1,7 +1,15 @@
 package com.icodeap.tradekeeper.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "SUPPLIERS")
 public class Supplier {
+    @Column
     public String name;
+    @Column
     public String country;
 
     public Supplier(String name, String country) {

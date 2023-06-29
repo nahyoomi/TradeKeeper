@@ -1,13 +1,22 @@
 package com.icodeap.tradekeeper.model;
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Entity
+@Table(name = "ITEMS")
 public class Item {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int itemCode;
+    @Column
     public String description;
+    @Column
     public double price;
+    @Column
     public String state;
+    @Column
     public Date creationDate;
+    @ManyToOne
     public User creator;
 
     public Item() {

@@ -1,17 +1,15 @@
 package com.icodeap.tradekeeper.controller;
 
 import com.icodeap.tradekeeper.model.Item;
-import com.icodeap.tradekeeper.service.ItemService;
 import com.icodeap.tradekeeper.service.ItemServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class ItemController {
-    ItemServiceImpl itemService = new ItemServiceImpl();
+    ItemServiceImpl itemService = new ItemServiceImpl(itemRepository);
 
     @GetMapping("/items")
     public ResponseEntity<List<Item>> getAllItems() {

@@ -1,12 +1,18 @@
 package com.icodeap.tradekeeper.service;
 
 import com.icodeap.tradekeeper.model.Item;
+import com.icodeap.tradekeeper.repository.ItemRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class ItemServiceImpl implements ItemService{
+    private final ItemRepository itemRepository;
+
+    public ItemServiceImpl(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
 
     @Override
     public List<Item> getAllItems() {
@@ -20,28 +26,26 @@ public class ItemServiceImpl implements ItemService{
         listItem.add(item_2);
         listItem.add(item_3);
 
-        return listItem;
+        return itemRepository.findAll();
     }
 
     @Override
     public Item createItem(Item item) {
         Date currentDate = new Date();
 
-        return new Item(1,"lorem ipsum", 2.67, "Active", currentDate, null );
+        return itemRepository.save(item);
     }
 
     @Override
     public Item updateItem(Item item) {
         Date currentDate = new Date();
-        return new Item(1,"lorem ipsum", 2.67, "Active", currentDate, null );
+        return itemRepository.save(item);
     }
 
     @Override
     public Item deactivateItem(Item item) {
         Date currentDate = new Date();
-        return new Item(1,"lorem ipsum", 2.67, "Active", currentDate, null );
+        item.setState("Deactive");
+        return itemRepository.save(item);
     }
 }
-
-//peticiones guardadas en postman
-//repositorios en la base de datos con spring boot y h2 leer
