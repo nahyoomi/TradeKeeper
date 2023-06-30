@@ -1,35 +1,39 @@
 package com.icodeap.tradekeeper.model;
 
+
 import javax.persistence.*;
 import java.util.Date;
 @Entity
-@Table(name = "ITEMS")
+@Table(name = "item")
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idItem")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    public long idItem;
+    @Column(name = "itemCode")
     public int itemCode;
-    @Column
+    @Column(name = "description")
     public String description;
-    @Column
+    @Column(name = "price")
     public double price;
-    @Column
+    @Column(name = "state")
     public String state;
-    @Column
+    @Column(name = "creationDate")
     public Date creationDate;
-    @ManyToOne
-    public User creator;
+    @Column(name = "userId")
+    public String userId;
 
     public Item() {
 
     }
 
-    public Item(int itemCode, String description, double price, String state, Date creationDate, User creator) {
+    public Item(int itemCode, String description, double price, String state, Date creationDate, String userId) {
         this.itemCode = itemCode;
         this.description = description;
         this.price = price;
         this.state = state;
         this.creationDate = creationDate;
-        this.creator = creator;
+        this.userId = userId;
     }
 
     public int getItemCode() {
@@ -72,11 +76,11 @@ public class Item {
         this.creationDate = creationDate;
     }
 
-    public User getCreator() {
-        return creator;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setCreator(User creator) {
-        this.creator = creator;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

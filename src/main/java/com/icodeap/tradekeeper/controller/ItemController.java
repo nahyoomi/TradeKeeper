@@ -2,14 +2,20 @@ package com.icodeap.tradekeeper.controller;
 
 import com.icodeap.tradekeeper.model.Item;
 import com.icodeap.tradekeeper.service.ItemServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping (value="item")
 public class ItemController {
-    ItemServiceImpl itemService = new ItemServiceImpl(itemRepository);
+    @Autowired
+    private ItemServiceImpl itemService;
+    public ItemController(ItemServiceImpl itemService) {
+        this.itemService = itemService;
+    }
 
     @GetMapping("/items")
     public ResponseEntity<List<Item>> getAllItems() {
@@ -26,7 +32,7 @@ public class ItemController {
         return ResponseEntity.ok(items);
     }
 
-    @PostMapping("/item/create")
+    @PostMapping
     public ResponseEntity<Item> createItem(Item item) {
 
         Item newItem = itemService.createItem(item);
@@ -34,7 +40,7 @@ public class ItemController {
         return ResponseEntity.ok(newItem);
     }
 
-    @PostMapping("/item/update")
+    @PutMapping("/update")
     public ResponseEntity<Item> updateItem(Item item){
 
         Item updateItem = itemService.updateItem(item);
@@ -42,7 +48,7 @@ public class ItemController {
         return  ResponseEntity.ok(updateItem);
     }
 
-    @DeleteMapping("item/remove")
+    @DeleteMapping("/remove")
     public ResponseEntity<Item> deactivateItem(Item item){
 
         Item deactivateItem = itemService.deactivateItem(item);

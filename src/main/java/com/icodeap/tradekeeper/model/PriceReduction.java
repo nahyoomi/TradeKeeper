@@ -1,25 +1,37 @@
 package com.icodeap.tradekeeper.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 @Entity
-@Table(name = "PRICE_REDUCTIONS")
+@Table(name = "priceReduction")
 public class PriceReduction {
-    @Column
+    @Id
+    @Column(name = "priceReductionId")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    public String priceReductionId;
+    @Column(name = "reducedPrice")
     public double reducedPrice;
-    @Column
+    @Column(name = "startDate")
     public Date startDate;
-    @Column
+    @Column(name = "endDate")
     public Date endDate;
 
-    public PriceReduction(double reducedPrice, Date startDate, Date endDate) {
+    public PriceReduction() {
+    }
+
+    public PriceReduction(String priceReductionId, double reducedPrice, Date startDate, Date endDate) {
+        this.priceReductionId = priceReductionId;
         this.reducedPrice = reducedPrice;
         this.startDate = startDate;
         this.endDate = endDate;
     }
+    public String getPriceReductionId() {
+        return priceReductionId;
+    }
 
+    public void setPriceReductionId(String priceReductionId) {
+        this.priceReductionId = priceReductionId;
+    }
     public double getReducedPrice() {
         return reducedPrice;
     }

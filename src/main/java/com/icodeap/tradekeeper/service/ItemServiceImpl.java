@@ -2,11 +2,12 @@ package com.icodeap.tradekeeper.service;
 
 import com.icodeap.tradekeeper.model.Item;
 import com.icodeap.tradekeeper.repository.ItemRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@Service
 public class ItemServiceImpl implements ItemService{
     private final ItemRepository itemRepository;
 

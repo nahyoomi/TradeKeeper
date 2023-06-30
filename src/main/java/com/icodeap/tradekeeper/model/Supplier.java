@@ -1,22 +1,35 @@
 package com.icodeap.tradekeeper.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "SUPPLIERS")
+@Table(name = "supplier")
 public class Supplier {
-    @Column
+    @Id
+    @Column(name = "supplierId")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    public String supplierId;
+    @Column(name = "name")
     public String name;
-    @Column
+    @Column(name = "country")
     public String country;
 
-    public Supplier(String name, String country) {
+    public Supplier() {
+
+    }
+
+    public Supplier(String supplierId, String name, String country) {
+        this.supplierId = supplierId;
         this.name = name;
         this.country = country;
     }
+    public String getSupplierId() {
+        return supplierId;
+    }
 
+    public void setSupplierId(String supplierId) {
+        this.supplierId = supplierId;
+    }
     public String getName() {
         return name;
     }
