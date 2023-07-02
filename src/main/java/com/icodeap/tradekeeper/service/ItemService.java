@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface ItemService {
     public List<Item> getAllItems();
+
+    public List<Item> getItemsByState(String state);
     public Item createItem(Item item);
     public Item updateItem(Item item);
     public Item deactivateItem(ItemRequestDelete item) throws Exception;
