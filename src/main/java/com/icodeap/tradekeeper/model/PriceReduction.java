@@ -8,28 +8,38 @@ public class PriceReduction {
     @Id
     @Column(name = "priceReductionId")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    public String priceReductionId;
+    public Integer priceReductionId;
     @Column(name = "reducedPrice")
     public double reducedPrice;
     @Column(name = "startDate")
     public Date startDate;
     @Column(name = "endDate")
     public Date endDate;
+    @Column(name = "item_id")
+    private Integer item;
 
     public PriceReduction() {
     }
 
-    public PriceReduction(String priceReductionId, double reducedPrice, Date startDate, Date endDate) {
+    public Integer getItem() {
+        return item;
+    }
+
+    public void setItem(Integer item) {
+        this.item = item;
+    }
+
+    public PriceReduction(Integer priceReductionId, double reducedPrice, Date startDate, Date endDate) {
         this.priceReductionId = priceReductionId;
         this.reducedPrice = reducedPrice;
         this.startDate = startDate;
         this.endDate = endDate;
     }
-    public String getPriceReductionId() {
+    public Integer getPriceReductionId() {
         return priceReductionId;
     }
 
-    public void setPriceReductionId(String priceReductionId) {
+    public void setPriceReductionId(Integer priceReductionId) {
         this.priceReductionId = priceReductionId;
     }
     public double getReducedPrice() {

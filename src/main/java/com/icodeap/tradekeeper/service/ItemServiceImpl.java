@@ -2,7 +2,9 @@ package com.icodeap.tradekeeper.service;
 
 import com.icodeap.tradekeeper.model.Item;
 import com.icodeap.tradekeeper.model.ItemRequestDelete;
+import com.icodeap.tradekeeper.model.PriceReduction;
 import com.icodeap.tradekeeper.repository.ItemRepository;
+import com.icodeap.tradekeeper.repository.PriceReductionRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,29 +16,36 @@ import java.util.NoSuchElementException;
 @Service
 public class ItemServiceImpl implements ItemService{
     private final ItemRepository itemRepository;
+    private final PriceReductionRepository priceReductionRepository;
 
-    public ItemServiceImpl(ItemRepository itemRepository) {
+    public ItemServiceImpl(ItemRepository itemRepository, PriceReductionRepository priceReductionRepository) {
         this.itemRepository = itemRepository;
+        this.priceReductionRepository = priceReductionRepository;
     }
 
     @Override
     public List<Item> getAllItems() {
-        Date currentDate = new Date();
-        Item item_1 = new Item(1,"lorem ipsum", 2.67, "Active", currentDate, null );
-        Item item_2 = new Item(2,"lorem ipsum", 7.23, "Deactive", currentDate, null );
-        Item item_3 = new Item(3,"lorem ipsum", 17.40, "Active", currentDate, null );
-
-        List<Item> listItem = new ArrayList<>();
-        listItem.add(item_1);
-        listItem.add(item_2);
-        listItem.add(item_3);
 
         return itemRepository.findAll();
     }
 
     @Override
+    public Item getItemByCode(Integer itemCode) {
+        Item item = itemRepository.findByCustomCodeQuery(itemCode);
+        item.setPriceReductions(item.getPriceReductions());
+        return item;
+    }
+
+    @Override
+    public List<Item> getItemsByState(String state) {
+        return itemRepository.findByCustomStateQuery(state);
+    }
+
+    @Override
     public Item createItem(Item item) {
+        item.setState("Active");
         Date currentDate = new Date();
+        item.setCreationDate(currentDate);
 
         return itemRepository.save(item);
     }
@@ -45,6 +54,21 @@ public class ItemServiceImpl implements ItemService{
     public Item updateItem(Item item) {
         Date currentDate = new Date();
         return itemRepository.save(item);
+    }
+
+    @Override
+    public Item updatePriceReduction(Item item) {
+
+        PriceReduction priceReduction = new PriceReduction();
+        /*Date currentDate = new Date();
+        priceReduction.setReducedPrice(9.99);
+        priceReduction.setStartDate(currentDate);
+        priceReduction.setEndDate(currentDate);
+        priceReduction.setItem(1);*/
+        priceReduction = item.getPriceReductions().get(0);
+        priceReductionRepository.save(priceReduction);
+
+        return item;
     }
 
     @Override
