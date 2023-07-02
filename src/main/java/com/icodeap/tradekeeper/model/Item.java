@@ -1,7 +1,10 @@
 package com.icodeap.tradekeeper.model;
 
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 @Entity
 @Table(name = "item")
@@ -9,10 +12,12 @@ public class Item {
     @Id
     @Column(name = "idItem")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    public long idItem;
-    @Column(name = "itemCode")
-    public int itemCode;
-    @Column(name = "description")
+    public Integer idItem;
+    @Column(name = "itemCode", nullable = false)
+    @NotNull
+    public Integer itemCode;
+    @Column(name = "description", nullable = false)
+    @NotNull
     public String description;
     @Column(name = "price")
     public double price;
