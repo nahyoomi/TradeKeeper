@@ -6,6 +6,8 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name = "item")
 public class Item {
@@ -28,6 +30,9 @@ public class Item {
     @Column(name = "userId")
     public String userId;
 
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<PriceReduction> priceReductions;
+
     public Item() {
 
     }
@@ -39,6 +44,14 @@ public class Item {
         this.state = state;
         this.creationDate = creationDate;
         this.userId = userId;
+    }
+
+    public List<PriceReduction> getPriceReductions() {
+        return priceReductions;
+    }
+
+    public void setPriceReductions(List<PriceReduction> priceReductions) {
+        this.priceReductions = priceReductions;
     }
 
     public int getItemCode() {

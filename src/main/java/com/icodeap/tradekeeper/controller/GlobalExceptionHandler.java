@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
         // Crear una lista de mensajes de error
         List<String> errors = new ArrayList<>();
         for (FieldError fieldError : fieldErrors) {
-            errors.add(fieldError.getDefaultMessage());
+            errors.add(fieldError.getField() + ":" + fieldError.getDefaultMessage());
         }
 
         // Crear una respuesta de error con los mensajes de error

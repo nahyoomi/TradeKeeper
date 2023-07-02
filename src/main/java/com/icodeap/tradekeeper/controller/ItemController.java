@@ -2,6 +2,8 @@ package com.icodeap.tradekeeper.controller;
 
 import com.icodeap.tradekeeper.model.Item;
 import com.icodeap.tradekeeper.model.ItemRequestDelete;
+import com.icodeap.tradekeeper.model.PriceReduction;
+import com.icodeap.tradekeeper.model.Supplier;
 import com.icodeap.tradekeeper.service.ItemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,12 +34,20 @@ public class ItemController {
 
         return ResponseEntity.ok(items);
     }
-    //AQUI FALTA METODO - Info de un articulo, incluya proveedores y reduccciones de precios asociadas al art.
 
+    //Info de un articulo, incluya proveedores y reduccciones de precios asociadas al art.
+    @GetMapping("/{itemCode}")
+    public ResponseEntity<Item>getItemDetails(@PathVariable Integer itemCode){
+        Item item = itemService.getItemByCode(itemCode);
+        return ResponseEntity.ok(item);
+
+//        List<Supplier> suppliers;
+//        List<PriceReduction> priceReduction;
+//        return null;
+    }
     //crear un art, campos obligatorios codigo del art y descripcion, establecer estado como activo, establecer la fecha de creacion.
     @PostMapping
     public ResponseEntity<Item> createItem(@Valid @RequestBody Item item) {
-
 
         Item newItem = itemService.createItem(item);
 
@@ -61,6 +71,15 @@ public class ItemController {
 
 
         return ResponseEntity.ok(deactivateItem);
+    }
+
+    //Ediccion de todos los campos menos  codigo art, incluir opcionpara asociar proveedor al art y verificar que no haya sido asociado antes, opcion de insertar reducciones de precios.
+    @PutMapping("/priceReduction")
+    public ResponseEntity<Item> updatePriceReduction(@Valid @RequestBody Item item){
+
+        Item updateItem = itemService.updatePriceReduction(item);
+
+        return  ResponseEntity.ok(updateItem);
     }
 
 }
