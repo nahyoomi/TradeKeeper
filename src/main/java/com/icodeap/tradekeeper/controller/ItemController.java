@@ -2,6 +2,7 @@ package com.icodeap.tradekeeper.controller;
 
 import com.icodeap.tradekeeper.model.Item;
 import com.icodeap.tradekeeper.model.ItemRequestDelete;
+import com.icodeap.tradekeeper.model.Supplier;
 import com.icodeap.tradekeeper.service.ItemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -77,5 +78,7 @@ public class ItemController {
 
         return  ResponseEntity.ok(updateItem);
     }
+
+
 
 }
