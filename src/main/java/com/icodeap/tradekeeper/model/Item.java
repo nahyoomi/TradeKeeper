@@ -1,6 +1,7 @@
 package com.icodeap.tradekeeper.model;
 
 
+import lombok.Data;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "item")
+@Data
 public class Item {
     @Id
     @Column(name = "idItem")
@@ -33,72 +35,10 @@ public class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<PriceReduction> priceReductions;
 
-    public Item() {
+    @ManyToMany
+    @JoinTable(name = "Item_Supplier",
+            joinColumns = @JoinColumn(name = "idItem"),
+            inverseJoinColumns = @JoinColumn(name = "supplierId"))
+    private List<Supplier> suppliers;
 
-    }
-
-    public Item(int itemCode, String description, double price, String state, Date creationDate, String userId) {
-        this.itemCode = itemCode;
-        this.description = description;
-        this.price = price;
-        this.state = state;
-        this.creationDate = creationDate;
-        this.userId = userId;
-    }
-
-    public List<PriceReduction> getPriceReductions() {
-        return priceReductions;
-    }
-
-    public void setPriceReductions(List<PriceReduction> priceReductions) {
-        this.priceReductions = priceReductions;
-    }
-
-    public int getItemCode() {
-        return itemCode;
-    }
-
-    public void setItemCode(int itemCode) {
-        this.itemCode = itemCode;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 }
