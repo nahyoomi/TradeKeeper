@@ -15,4 +15,5 @@ public interface ItemService {
     public Item updatePriceReduction(Item item);
     public Item deactivateItem(ItemRequestDelete item) throws Exception;
 
+    Item updateSupplier(Item item);
 }
