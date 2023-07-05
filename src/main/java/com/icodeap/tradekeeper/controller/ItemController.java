@@ -2,7 +2,6 @@ package com.icodeap.tradekeeper.controller;
 
 import com.icodeap.tradekeeper.model.Item;
 import com.icodeap.tradekeeper.model.ItemRequestDelete;
-import com.icodeap.tradekeeper.model.Supplier;
 import com.icodeap.tradekeeper.service.ItemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +29,9 @@ public class ItemController {
             items = itemService.getAllItems();
         }
 
-        return ResponseEntity.ok(items);
+         return ResponseEntity.ok()
+                .header("Access-control-allow-origin", "*")
+                .body(items);
     }
 
     @GetMapping("/{itemCode}")

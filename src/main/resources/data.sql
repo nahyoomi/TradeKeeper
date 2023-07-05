@@ -28,8 +28,8 @@ VALUES
   ( 3, 3);
 
 --Default user data
-INSERT INTO user (username, password, registered)
-VALUES
-  ('admin', 'admin123', '2023-01-01'),
-  ('user1', 'password1', '2023-01-02'),
-  ('user2', 'password2', '2023-01-03');
+--INSERT INTO user (username, password, registered)
+--VALUES
+--  ('admin', 'admin123', '2023-01-01'),
+--  ('user1', 'password1', '2023-01-02'),
+--  ('user2', 'password2', '2023-01-03');
