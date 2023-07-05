@@ -37,7 +37,9 @@ public class ItemController {
     @GetMapping("/{itemCode}")
     public ResponseEntity<Item>getItemDetails(@PathVariable Integer itemCode){
         Item item = itemService.getItemByCode(itemCode);
-        return ResponseEntity.ok(item);
+        return ResponseEntity.ok()
+                .header("Access-control-allow-origin", "*")
+                .body(item);
     }
     @PostMapping
     public ResponseEntity<Item> createItem(@Valid @RequestBody Item item) {
