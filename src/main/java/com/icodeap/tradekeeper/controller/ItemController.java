@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping (value="item")
+@CrossOrigin
 public class ItemController {
     @Autowired
     private ItemServiceImpl itemService;
