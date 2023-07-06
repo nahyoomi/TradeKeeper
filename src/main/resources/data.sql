@@ -6,6 +6,7 @@ VALUES
   (2,1002, 'Descripción del item 2', 15.99, 'Active', '2023-01-02', 'user2'),
   (3,1003, 'Descripción del item 3', 20.99, 'Active', '2023-01-03', 'user3');
 
+
 --Default priceReduction data
 INSERT INTO price_Reduction (price_reduction_id,reduced_Price, start_Date, end_Date, item_id)
 VALUES
