@@ -15,7 +15,8 @@ import java.util.List;
 public class Item {
     @Id
     @Column(name = "idItem")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "idItem")
+    @SequenceGenerator(name = "idItem", sequenceName = "idItem", initialValue = 4, allocationSize = 1)
     public Integer idItem;
     @Column(name = "itemCode", nullable = false)
     @NotNull

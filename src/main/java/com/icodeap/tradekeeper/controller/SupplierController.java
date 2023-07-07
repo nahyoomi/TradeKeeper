@@ -20,7 +20,9 @@ public class SupplierController {
     @GetMapping("/suppliers")
     public ResponseEntity<List<Supplier>> getSuppliers() {
         List<Supplier> suppliers = supplierService.getSuppliers();
-        return ResponseEntity.ok(suppliers);
+        return ResponseEntity.ok()
+                .header("Access-control-allow-origin", "*")
+                .body(suppliers);
     }
 
     @PostMapping
