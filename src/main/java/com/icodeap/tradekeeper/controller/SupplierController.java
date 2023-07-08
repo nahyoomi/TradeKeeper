@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="supplier")
+@RequestMapping(value="/api/supplier")
 @CrossOrigin
 public class SupplierController {
     @Autowired

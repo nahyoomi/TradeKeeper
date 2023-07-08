@@ -1,56 +1,33 @@
 package com.icodeap.tradekeeper.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
+@Entity
+@Table(name = "users")
+@NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public String userId;
-    @Column(name = "username")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user_id")
+    @SequenceGenerator(name="user_id", sequenceName="user_id" , initialValue=2, allocationSize=1)
+    public Long userId;
+
     public String username;
-    @Column(name = "password")
     public String password;
-    @Column(name = "registered")
     public String registered;
+    public String email;
 
-    public User(String userId, String username, String password, String registered) {
-        this.userId = userId;
-        this.username = username;
-        this.password = password;
-        this.registered = registered;
-    }
-    public String getUserId() {
-        return userId;
-    }
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRegistered() {
-        return registered;
-    }
-
-    public void setRegistered(String registered) {
-        this.registered = registered;
-    }
 }

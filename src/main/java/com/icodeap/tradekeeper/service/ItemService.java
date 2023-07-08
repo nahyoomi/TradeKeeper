@@ -1,8 +1,7 @@
 package com.icodeap.tradekeeper.service;
 
 import com.icodeap.tradekeeper.model.Item;
-import com.icodeap.tradekeeper.model.ItemRequestDelete;
-import org.springframework.stereotype.Service;
+import com.icodeap.tradekeeper.model.request.ItemRequestDelete;
 
 import java.util.List;
 
