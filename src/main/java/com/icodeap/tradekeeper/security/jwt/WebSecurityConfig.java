@@ -55,8 +55,8 @@ public class WebSecurityConfig {
 
     @Bean
     public RequestMatcher apiRequestMatcher() {
-        return new AntPathRequestMatcher("/api/auth/**");
-        //return new AntPathRequestMatcher("/api/**");
+//        return new AntPathRequestMatcher("/api/auth/**");
+        return new AntPathRequestMatcher("/api/**");
     }
     @Bean
     public RequestMatcher otherRequestMatcher() {
@@ -73,6 +73,7 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http.csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

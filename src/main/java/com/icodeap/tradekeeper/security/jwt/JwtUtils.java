@@ -45,10 +45,11 @@ public class JwtUtils {
 
     public String getJwtFromHeader(HttpServletRequest request) {
         String jwtToken = request.getHeader(HEADER);
-        if (StringUtils.hasText(jwtToken) && jwtToken.startsWith(PREFIX)) {
-            return jwtToken.replace(PREFIX, "");
-        }
-        return null;
+//        if (StringUtils.hasText(jwtToken) && jwtToken.startsWith(PREFIX)) {
+//            return jwtToken.replace(PREFIX, "");
+//        }
+//        return null;
+        return jwtToken;
     }
 
     public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) {
