@@ -18,8 +18,6 @@ import com.icodeap.tradekeeper.security.jwt.JwtUtils;
 import com.icodeap.tradekeeper.service.UserDetailsImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,6 +36,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -63,16 +62,25 @@ public class AuthController {
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+        //ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+        String jwt = jwtUtils.generateJwt(userDetails);
 
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        User user = userRepository.findByUsername(userDetails.getUsername()).get();
+        user.setToken(jwt);
+        userRepository.save(user);
+
+
+        return ResponseEntity.ok()
                 .body(new UserInfoResponse(userDetails.getId(),
                         userDetails.getUsername(),
                         userDetails.getEmail(),
+                        jwt,
                         roles));
     }
 
@@ -129,8 +137,18 @@ public class AuthController {
 
     @PostMapping("/signout")
     public ResponseEntity<?> logoutUser() {
-        ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .body(new MessageResponse("You've been signed out!"));
+        // Obtener el usuario autenticado
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        System.out.println("username" + username);
+        // Actualizar el token del usuario a un valor nulo o un valor especial para indicar que el token ya no es válido
+        User user = userRepository.findByUsername(username).orElse(null);
+        if (user != null) {
+            user.setToken(null); // O asigna un valor especial si lo deseas
+            userRepository.save(user);
+        }
+
+        return ResponseEntity.ok().body(new MessageResponse("You've been signed out!"));
     }
 }

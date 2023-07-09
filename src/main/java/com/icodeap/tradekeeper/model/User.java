@@ -1,7 +1,5 @@
 package com.icodeap.tradekeeper.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +21,7 @@ public class User {
     public String password;
     public String registered;
     public String email;
+    public String token;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
