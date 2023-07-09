@@ -1,4 +1,4 @@
-package com.icodeap.tradekeeper.model;
+package com.icodeap.tradekeeper.model.request;
 
 import javax.validation.constraints.NotNull;
 

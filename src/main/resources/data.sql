@@ -28,9 +28,11 @@ VALUES
   ( 2, 2),
   ( 3, 3);
 
+INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+
 --Default user data
---INSERT INTO user (username, password, registered)
---VALUES
---  ('admin', 'admin123', '2023-01-01'),
---  ('user1', 'password1', '2023-01-02'),
---  ('user2', 'password2', '2023-01-03');
+--admin12345--
+INSERT INTO users (user_id, email, password, registered,username)
+VALUES
+(1,'admin@correo.com','$2a$10$33qAXWFFtrfMrbaC07OStuRayJLinzDS9F.ars/fka5VX79j/FikS',	null,	'admin')

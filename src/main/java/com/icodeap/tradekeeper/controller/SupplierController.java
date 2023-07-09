@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="supplier")
+@RequestMapping(value="/api/supplier")
 @CrossOrigin
 public class SupplierController {
     @Autowired
@@ -20,7 +20,9 @@ public class SupplierController {
     @GetMapping("/suppliers")
     public ResponseEntity<List<Supplier>> getSuppliers() {
         List<Supplier> suppliers = supplierService.getSuppliers();
-        return ResponseEntity.ok(suppliers);
+        return ResponseEntity.ok()
+                .header("Access-control-allow-origin", "*")
+                .body(suppliers);
     }
 
     @PostMapping

@@ -1,6 +1,7 @@
 package com.icodeap.tradekeeper.service;
 
 import com.icodeap.tradekeeper.model.*;
+import com.icodeap.tradekeeper.model.request.ItemRequestDelete;
 import com.icodeap.tradekeeper.repository.ItemRepository;
 import com.icodeap.tradekeeper.repository.Item_SupplierRepository;
 import com.icodeap.tradekeeper.repository.PriceReductionRepository;
