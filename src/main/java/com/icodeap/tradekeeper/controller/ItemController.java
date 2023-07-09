@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping (value="/api/item")
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class ItemController {
     @Autowired
     private ItemServiceImpl itemService;
@@ -20,8 +20,8 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    @GetMapping("/items")
-    public ResponseEntity<List<Item>> getAllItems(@RequestParam(required = false) String state) {
+    @GetMapping("/items/{state}")
+    public ResponseEntity<List<Item>> getAllItems(@PathVariable String state) {
         List<Item> items;
 
         if (state != null) {
@@ -58,10 +58,11 @@ public class ItemController {
         return  ResponseEntity.ok(updateItem);
     }
 
-    @DeleteMapping("/remove")
-    public ResponseEntity<Item> deactivateItem(@Valid @RequestBody ItemRequestDelete item){
+    @DeleteMapping("/remove/{idItem}/{reason}")
+    public ResponseEntity<Item> deactivateItem(@Valid @PathVariable Integer idItem, @PathVariable String reason){
 
-        Item deactivateItem = itemService.deactivateItem(item);
+        ItemRequestDelete itemRequestDelete = new ItemRequestDelete(idItem, reason);
+        Item deactivateItem = itemService.deactivateItem(itemRequestDelete);
 
 
         return ResponseEntity.ok(deactivateItem);
