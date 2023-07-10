@@ -7,7 +7,8 @@ import java.util.Date;
 public class PriceReduction {
     @Id
     @Column(name = "priceReductionId")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "priceReductionId")
+    @SequenceGenerator(name="priceReductionId", sequenceName="priceReductionId" , initialValue=4, allocationSize=1)
     public Integer priceReductionId;
     @Column(name = "reducedPrice")
     public double reducedPrice;

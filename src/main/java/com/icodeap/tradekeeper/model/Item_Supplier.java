@@ -10,7 +10,8 @@ import javax.persistence.*;
 public class Item_Supplier {
     @Id
     @Column(name = "item_supplierId")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_supplierId")
+    @SequenceGenerator(name="item_supplierId", sequenceName="item_supplierId" , initialValue=4, allocationSize=1)
     public Integer item_supplierId;
 
     public Integer supplierId;
