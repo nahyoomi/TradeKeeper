@@ -1,7 +1,10 @@
 package com.icodeap.tradekeeper.controller;
 
 import com.icodeap.tradekeeper.model.Item;
+import com.icodeap.tradekeeper.model.Item_Supplier;
 import com.icodeap.tradekeeper.model.request.ItemRequestDelete;
+import com.icodeap.tradekeeper.model.request.ItemSupplierRequest;
+import com.icodeap.tradekeeper.model.response.ItemDetails;
 import com.icodeap.tradekeeper.service.ItemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +39,8 @@ public class ItemController {
     }
 
     @GetMapping("/{itemCode}")
-    public ResponseEntity<Item>getItemDetails(@PathVariable Integer itemCode){
-        Item item = itemService.getItemByCode(itemCode);
+    public ResponseEntity<ItemDetails>getItemDetails(@PathVariable Integer itemCode){
+        ItemDetails item = itemService.getItemByCode(itemCode);
         return ResponseEntity.ok()
                 .header("Access-control-allow-origin", "*")
                 .body(item);
@@ -77,11 +80,11 @@ public class ItemController {
     }
 
     @PutMapping("/supplier")
-    public ResponseEntity<Item> updateSupplier(@Valid @RequestBody Item item){
+    public ResponseEntity<Item_Supplier> updateSupplier(@Valid @RequestBody ItemSupplierRequest item){
 
-        Item updateItem = itemService.updateSupplier(item);
+        Item_Supplier Item_Supplier = itemService.updateSupplier(item);
 
-        return  ResponseEntity.ok(updateItem);
+        return  ResponseEntity.ok(Item_Supplier);
     }
 
 

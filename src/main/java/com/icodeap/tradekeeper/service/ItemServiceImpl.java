@@ -2,9 +2,12 @@ package com.icodeap.tradekeeper.service;
 
 import com.icodeap.tradekeeper.model.*;
 import com.icodeap.tradekeeper.model.request.ItemRequestDelete;
+import com.icodeap.tradekeeper.model.request.ItemSupplierRequest;
+import com.icodeap.tradekeeper.model.response.ItemDetails;
 import com.icodeap.tradekeeper.repository.ItemRepository;
 import com.icodeap.tradekeeper.repository.Item_SupplierRepository;
 import com.icodeap.tradekeeper.repository.PriceReductionRepository;
+import com.icodeap.tradekeeper.repository.SupplierRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +18,9 @@ import java.util.NoSuchElementException;
 
 @Service
 @AllArgsConstructor
-public class ItemServiceImpl implements ItemService{
+public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
+    private final SupplierRepository supplierRepository;
     private final PriceReductionRepository priceReductionRepository;
     private final Item_SupplierRepository item_supplierRepository;
 
@@ -28,10 +32,19 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public Item getItemByCode(Integer itemCode) {
+    public ItemDetails getItemByCode(Integer itemCode) {
+
         Item item = itemRepository.findByCustomCodeQuery(itemCode);
         item.setPriceReductions(item.getPriceReductions());
-        return item;
+        item.setSuppliers(item.getSuppliers());
+
+        ItemDetails ItemDetails = com.icodeap.tradekeeper.model.response.ItemDetails.builder()
+                .item(item)
+                .priceReductionList(item.getPriceReductions())
+                .supplierList(null)
+                .build();
+
+        return ItemDetails;
     }
 
     @Override
@@ -58,11 +71,6 @@ public class ItemServiceImpl implements ItemService{
     public Item updatePriceReduction(Item item) {
 
         PriceReduction priceReduction = new PriceReduction();
-        /*Date currentDate = new Date();
-        priceReduction.setReducedPrice(9.99);
-        priceReduction.setStartDate(currentDate);
-        priceReduction.setEndDate(currentDate);
-        priceReduction.setItem(1);*/
         priceReduction = item.getPriceReductions().get(0);
         priceReductionRepository.save(priceReduction);
 
@@ -82,11 +90,18 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public Item updateSupplier(Item item) {
+    public Item_Supplier updateSupplier(ItemSupplierRequest item) {
         Item_Supplier item_supplier = new Item_Supplier();
-        item_supplier.setSupplierId(item.getSuppliers().get(0).getSupplierId());
-        item_supplier.setIdItem(item.getIdItem());
-        item_supplierRepository.save(item_supplier);
-        return item;
+
+        Item item1 = itemRepository.findById(item.getIdItem()).get();
+
+        Supplier supplier = supplierRepository.findById(item.getSupplierId()).get();
+
+
+        item_supplier.setIdItem(item1);
+        item_supplier.setSupplierId(supplier);
+
+        return item_supplierRepository.save(item_supplier);
+
     }
 }
