@@ -24,7 +24,7 @@ public class ItemController {
     public ResponseEntity<List<Item>> getAllItems(@PathVariable String state) {
         List<Item> items;
 
-        if (state != null) {
+        if (state.matches("Active|Deactive")) {
             items = itemService.getItemsByState(state);
         } else {
             items = itemService.getAllItems();
