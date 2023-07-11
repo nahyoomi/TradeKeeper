@@ -14,9 +14,9 @@ import java.util.List;
 @Data
 public class Item {
     @Id
-    @Column(name = "idItem")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="idItem")
-    @SequenceGenerator(name="idItem", sequenceName="idItem" , initialValue=4, allocationSize=1)
+    @Column(name = "id_item")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="id_item")
+    @SequenceGenerator(name="id_item", sequenceName="id_item" , initialValue=4, allocationSize=1)
     public Integer idItem;
     @Column(name = "itemCode", nullable = false)
     @NotNull
@@ -36,10 +36,10 @@ public class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<PriceReduction> priceReductions;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(name = "Item_Supplier",
-            joinColumns = @JoinColumn(name = "idItem"),
-            inverseJoinColumns = @JoinColumn(name = "supplierId"))
-    private List<Supplier> suppliers;
+            joinColumns = @JoinColumn(name = "id_item"),
+            inverseJoinColumns = @JoinColumn(name = "supplier_id"))
+    private List<Item_Supplier> suppliers;
 
 }
