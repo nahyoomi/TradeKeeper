@@ -22,11 +22,11 @@ VALUES
   (3,'Proveedor 3', 'País del proveedor 3');
 
 --Default Item_supplier data
-INSERT INTO item_supplier (item_supplier_Id, id_Item)
+INSERT INTO item_supplier (item_supplier_Id, id_Item, supplier_id)
 VALUES
-  (1, 1),
-  ( 2, 2),
-  ( 3, 3);
+  (1, 1, 1),
+  ( 2, 2, 2),
+  ( 3, 3, 3);
 
 INSERT INTO roles(name) VALUES('ROLE_USER');
 INSERT INTO roles(name) VALUES('ROLE_ADMIN');
