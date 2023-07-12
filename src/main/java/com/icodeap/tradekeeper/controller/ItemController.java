@@ -1,5 +1,4 @@
 package com.icodeap.tradekeeper.controller;
-
 import com.icodeap.tradekeeper.model.Item;
 import com.icodeap.tradekeeper.model.Item_Supplier;
 import com.icodeap.tradekeeper.model.request.ItemRequestDelete;
@@ -9,7 +8,6 @@ import com.icodeap.tradekeeper.service.ItemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -86,7 +84,5 @@ public class ItemController {
 
         return  ResponseEntity.ok(Item_Supplier);
     }
-
-
 
 }
