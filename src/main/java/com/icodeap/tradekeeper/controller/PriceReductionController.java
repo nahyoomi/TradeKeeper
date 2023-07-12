@@ -28,6 +28,4 @@ public class PriceReductionController {
         PriceReduction newPriceReduction = priceReductionService.createPriceReduction(priceReduction);
         return ResponseEntity.ok(newPriceReduction);
     }
-
-
 }

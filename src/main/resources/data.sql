@@ -2,9 +2,9 @@
 --Default item data
 INSERT INTO item (id_item,item_Code, description, price, state, creation_Date, user_Id)
 VALUES
-  (1,1001, 'Descripción del item 1', 10.99, 'Active', '2023-01-01', 'user1'),
-  (2,1002, 'Descripción del item 2', 15.99, 'Active', '2023-01-02', 'user2'),
-  (3,1003, 'Descripción del item 3', 20.99, 'Active', '2023-01-03', 'user3');
+  (1,1001, 'Floral Print Pillow Cover', 19.99, 'Active', '2023-01-01', 'user1'),
+  (2,1002, 'Vintage Brass Table Lamp', 79.99, 'Active', '2023-01-02', 'user2'),
+  (3,1003, 'Rustic Wooden Shelf', 59.99, 'Active', '2023-01-03', 'user3');
 
 
 --Default priceReduction data
@@ -17,9 +17,9 @@ VALUES
 --Default supplier data
 INSERT INTO supplier (supplier_id,name, country)
 VALUES
-  (1,'Proveedor 1', 'País del proveedor 1'),
-  (2,'Proveedor 2', 'País del proveedor 2'),
-  (3,'Proveedor 3', 'País del proveedor 3');
+  (1,'Creative Interiors', 'Canada'),
+  (2,'Artistic Express', 'Japan'),
+  (3,'Vintage Finds', 'Italy');
 
 --Default Item_supplier data
 INSERT INTO item_supplier (item_supplier_Id, id_item, supplier_id)

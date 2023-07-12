@@ -1,6 +1,4 @@
 package com.icodeap.tradekeeper.controller;
-
-import com.icodeap.tradekeeper.model.Item;
 import com.icodeap.tradekeeper.model.Supplier;
 import com.icodeap.tradekeeper.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
